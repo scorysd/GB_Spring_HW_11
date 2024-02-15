@@ -4,6 +4,7 @@ import com.example.hw_5.models.Book;
 import com.example.hw_5.repositories.BookRepo;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -29,11 +30,17 @@ public class BookService {
         return bookRepo.save(new Book(nameBook, authorBook));
     }
 
-    public void deleteBook(Long id) {
-        bookRepo.deleteById(id);
+    public Optional<Book> deleteBook(Long id) {
+        Optional<Book> exist = getBookById(id);
+        if (exist != null) {
+            bookRepo.deleteById(id);
+        } else {
+            System.out.println("book doesnt exist");
+        }
+        return exist;
     }
 
-    @PostConstruct
+//            @PostConstruct
     public void generateBook() {
         bookRepo.save(new Book("Dead soul", "Gogol N.V."));
         bookRepo.save(new Book("Peace & War", "Tolstoy L.N."));

@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/book")
@@ -28,8 +27,10 @@ public class BookController {
 
     @GetMapping("/{id}")
     @Operation(summary = "get book by id", description = "загружает книгу по заданному монеру (id)")
-    public Optional<Book> getBookById(@PathVariable long id){
-        return bookService.getBookById(id);
+    public ResponseEntity<Book> getBookById(@PathVariable long id, Book book){
+        return bookService.getBookById(id).isPresent()
+                ? ResponseEntity.status(HttpStatus.OK).body(book)
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @PostMapping("/new")
@@ -41,8 +42,9 @@ public class BookController {
     @DeleteMapping("/{id}")
     @Operation(summary = "delete book by id", description = "удаляет книгу по заданному номеру (id)")
     public ResponseEntity<Book> deleteBook(@PathVariable long id, @RequestBody Book book){
-         bookService.deleteBook(id);
-         return ResponseEntity.status(HttpStatus.OK).body(book);
+        return bookService.deleteBook(id).isPresent()
+                 ? ResponseEntity.status(HttpStatus.OK).body(book)
+                 : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
 }

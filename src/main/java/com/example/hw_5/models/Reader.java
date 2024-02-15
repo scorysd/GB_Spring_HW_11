@@ -3,6 +3,7 @@ package com.example.hw_5.models;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ManyToAny;
@@ -18,6 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Schema(name = "Читатель")
+@AllArgsConstructor
 
 public class Reader {
 
@@ -61,5 +63,8 @@ public class Reader {
         this.bookOnHands = 0;
         this.roles.addAll(Arrays.asList(roles));
     }
-
+//    public Reader( String name) {
+//        this.name = name;
+//
+//    }
 }

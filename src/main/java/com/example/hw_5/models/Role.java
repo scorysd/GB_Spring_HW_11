@@ -1,5 +1,6 @@
 package com.example.hw_5.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +16,10 @@ import org.springframework.security.core.GrantedAuthority;
 //@Schema(name = "Роли")
 //@NoArgsConstructor
 public enum Role implements GrantedAuthority {
-    USER, ADMIN;
+    @JsonProperty("user")
+    USER,
+    @JsonProperty("admin")
+    ADMIN;
 //
 //    @Id
 //    @Schema(name = "идентификатор")

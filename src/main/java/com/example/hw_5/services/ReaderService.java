@@ -19,15 +19,15 @@ public class ReaderService {
         this.readerRepo = readerRepo;
     }
 
-    @PostConstruct
-    public void generateReader() {
-        for (int i = 1; i < 11; i++) {
-            readerRepo.save(new Reader("Reader" + i, "reader" + i, "Reader # " + i, Role.USER));
-        log.info("Create user " + i);
-        }
-        readerRepo.save(new Reader("admin","admin","Admin", Role.ADMIN));
-        log.info("Create Admin");
-    }
+//    @PostConstruct
+//    public void generateReader() {
+//        for (int i = 1; i < 11; i++) {
+//            readerRepo.save(new Reader("Reader" + i, "reader" + i, "Reader # " + i, Role.USER));
+//        log.info("Create user " + i);
+//        }
+//        readerRepo.save(new Reader("admin","admin","Admin", Role.ADMIN));
+//        log.info("Create Admin");
+//    }
 
     public List<Reader> getAllReader() {
         return readerRepo.findAll();
